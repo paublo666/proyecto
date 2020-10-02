@@ -1,0 +1,24 @@
+{
+	"marca": [
+		{
+			"id_modelo": 1,
+			"nombre_modelo": 1996
+		},
+		{
+			"id_modelo": 2,
+			"nombre_modelo": 1995
+		},
+		{
+			"id_modelo": 3,
+			"nombre_modelo": 1994
+		},
+		{
+			"id_modelo": 4,
+			"nombre_modelo": 1997
+		},
+		{
+			"id_modelo": 5,
+			"nombre_modelo": 1998
+		}
+	]
+}

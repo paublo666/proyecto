@@ -1,0 +1,24 @@
+{
+	"ciudad": [
+		{
+			"codigo": 1,
+			"nombre": "armenia"
+		},
+		{
+			"codigo": 2,
+			"nombre": "pereira"
+		},
+		{
+			"codigo": 3,
+			"nombre": "manizales"
+		},
+		{
+			"codigo": 4,
+			"nombre": "bogota"
+		},
+		{
+			"codigo": 5,
+			"nombre": "medellin"
+		}
+	]
+}

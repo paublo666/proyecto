@@ -2,6 +2,8 @@ package co.edu.uniquindio.banco.entidades;
 
 import java.io.Serializable;
 import java.lang.String;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -13,13 +15,14 @@ import javax.persistence.*;
 public class Persona implements Serializable {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 100, nullable = false)
-	private String id;
+	private Integer id;
 	
 	@Column(name = "nombre", length = 200, nullable = false)
 	private String nombre;
 	
-	@Column(name = "email", length = 100, nullable = false)
+	@Column(name = "email", length = 100, nullable = false, unique = true)
 	private String email;
 	
 	@Column(name = "clave", length = 100, nullable = false)
@@ -32,15 +35,40 @@ public class Persona implements Serializable {
 	@JoinColumn(name = "codigo_ciudad", nullable = false)
 	@ManyToOne
 	private Ciudad ciudad ;
+	
+	
+	@ElementCollection
+	private java.util.Map<String,Integer> telefonos;
+	
+	@OneToMany(mappedBy = "idpersona")
+	private java.util.List<Vehiculo> vehiculos;
+	 
+	
+	@OneToMany(mappedBy = "persona")
+	private List<Favorito> favoritos;
+	
+	@OneToMany(mappedBy = "persona")
+	private List<Pregunta> preguntas;
+	
+	
 
+	public Persona(Integer id, String nombre, String email, String clave, String direccion, Ciudad ciudad) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.email = email;
+		this.clave = clave;
+		this.direccion = direccion;
+		this.ciudad = ciudad;
+	}
 	public Persona() {
 		super();
 	}   
-	public String getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}   
 	public String getNombre() {
@@ -93,6 +121,11 @@ public class Persona implements Serializable {
 		} else if (!clave.equals(other.clave))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", email=" + email + ", clave=" + clave + ", direccion="
+				+ direccion + ", ciudad=" + ciudad + "]";
 	}
 	
 	

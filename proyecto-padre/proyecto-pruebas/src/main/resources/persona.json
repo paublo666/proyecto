@@ -1,0 +1,49 @@
+{
+	"persona": [
+		{
+		    "id": 1,
+		    "clave": "123",
+		    "codigo_ciudad": 1,
+			"email": "psa@mail",
+			"nombre": "pedro ",
+		    "direccion":"123"
+			
+		},
+		{
+		    "id": 2,
+		    "clave": "1223",
+		    "codigo_ciudad": 2,
+			"email": "psassa@mail",
+			"nombre": "pablo ",
+			"direccion":"123"
+			
+		},
+		{
+		    "id": 3,
+		    "clave": "1234",
+		    "codigo_ciudad": 1,
+			"email": "jorge@mail",
+			"nombre": "jorge ",
+		    "direccion":"123"
+			
+
+		},
+		{
+		    "id": 4,
+		    "clave": "123",
+		    "codigo_ciudad": 1,
+			"email": "hotmail@mail",
+			"nombre": "hotmail ",
+			"direccion":"123"
+			
+		},
+		{
+		    "id": 5,
+		    "clave": "1213",
+		    "codigo_ciudad": 1,
+			"email": "gmaila@mail",
+			"nombre": "juano ",
+			"direccion":"123"
+		}
+	]
+}

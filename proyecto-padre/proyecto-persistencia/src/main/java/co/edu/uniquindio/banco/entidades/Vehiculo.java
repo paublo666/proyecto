@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.*;
 
 /**
@@ -15,8 +18,9 @@ import javax.persistence.*;
 public class Vehiculo implements Serializable {
 
 	@Id
-	@Column(name = "idvehiculo", length = 100, nullable = false)
-	private String idvehiculo;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idvehiculo", nullable = false)
+	private Integer idvehiculo;
 	
 	@Column(name = "precio", nullable = false)
 	private Double precio;
@@ -26,24 +30,87 @@ public class Vehiculo implements Serializable {
 	
 	@Column(name = "anio", nullable = false)
 	private Integer anio;
+	
+	@Column(name="fecha_publicacion", nullable = false)
+	private String fecha;
+	
+	@Column(name="nombre_vehiculo", nullable = false)
+	private String nombre_vehiculo;
+	
+	@Column(name="color_vehiculo", nullable = false)
+	private String color;
+	
+	@ElementCollection
+	private java.util.Map<String,Integer> fotos;
+	
 	private static final long serialVersionUID = 1L;
 	
+	
 	@ManyToOne
-	@JoinColumn(name = "ciudad", nullable = false)
+	@JoinColumn(name = "id_persona")
+	private Persona idpersona;
+	
+	
+	@ManyToOne
+	@JoinColumn(name = "id_ciudad", nullable = false)
 	private Ciudad ciudad;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_modelo")
+	private Modelo modelo;
+	
+	@ManyToOne
+	@JoinColumn(name= "id_marca")
+	private Marca marca;
+	
+	@OneToMany(mappedBy = "vehiculo")
+	private List<Favorito> favoritos;
+	
 	@Enumerated(EnumType.STRING)
-	@JoinColumn(name =" tipocombustible", nullable = false )
+	@JoinColumn(name = "tipo_vehiculo", nullable = false)
+	private TipoVehiculo tipovehiculo;
+	
+	@Enumerated(EnumType.STRING)
+	@JoinColumn(name =" tipo_combustible", nullable = false )
 	private TipoCombustible tipocombustible;
+	
+	@Enumerated(EnumType.STRING)
+	@JoinColumn(name = "transmision", nullable = false)
+	private Transmision transmision ;
+	
+	@OneToMany(mappedBy = "vehiculo")
+	private List<Pregunta> preguntas;
+	
+	
 
+	public Vehiculo(Integer idvehiculo, Double precio, String descripcion, Integer anio, String fecha,
+			String nombre_vehiculo, String color, Persona idpersona, Ciudad ciudad,
+			Modelo modelo, Marca marca, TipoVehiculo tipovehiculo, TipoCombustible tipocombustible,
+			Transmision transmision) {
+		super();
+		this.idvehiculo = idvehiculo;
+		this.precio = precio;
+		this.descripcion = descripcion;
+		this.anio = anio;
+		this.fecha = fecha;
+		this.nombre_vehiculo = nombre_vehiculo;
+		this.color = color;
+		this.idpersona = idpersona;
+		this.ciudad = ciudad;
+		this.modelo = modelo;
+		this.marca = marca;
+		this.tipovehiculo = tipovehiculo;
+		this.tipocombustible = tipocombustible;
+		this.transmision = transmision;
+	}
 	public Vehiculo() {
 		super();
 	}   
-	public String getIdvehiculo() {
+	public Integer getIdvehiculo() {
 		return this.idvehiculo;
 	}
 
-	public void setIdvehiculo(String idvehiculo) {
+	public void setIdvehiculo(Integer idvehiculo) {
 		this.idvehiculo = idvehiculo;
 	}   
 	public Double getPrecio() {
@@ -90,6 +157,17 @@ public class Vehiculo implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Vehiculo [idvehiculo=" + idvehiculo + ", precio=" + precio + ", descripcion=" + descripcion + ", anio="
+				+ anio + ", fecha=" + fecha + ", nombre_vehiculo=" + nombre_vehiculo + ", color=" + color
+				+ ", idpersona=" + idpersona + ", ciudad=" + ciudad + ", modelo=" + modelo + ", marca=" + marca
+				+ ", tipovehiculo=" + tipovehiculo + ", tipocombustible=" + tipocombustible + ", transmision="
+				+ transmision + "]";
+	}
+	
+	
+
    
 	
 }

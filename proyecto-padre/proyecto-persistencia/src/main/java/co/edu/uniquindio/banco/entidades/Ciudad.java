@@ -26,8 +26,6 @@ public class Ciudad implements Serializable {
 	@OneToMany(mappedBy = "ciudad")
 	private java.util.List<Persona> personas;
 	
-	@OneToMany(mappedBy = "ciudad")
-	private java.util.List<Sede> sedes;
 	
 	@OneToMany(mappedBy = "ciudad")
 	private java.util.List<Vehiculo> vehiculos;

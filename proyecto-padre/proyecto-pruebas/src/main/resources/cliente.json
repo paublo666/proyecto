@@ -1,0 +1,32 @@
+{
+	"persona": [
+		{
+			"cedula": "253",
+			"email": "psa@mail",
+			"nombre": "pedro "
+		},
+		{
+			"cedula": "22123",
+			"email": "psassa@mail",
+			"nombre": "pablo "
+		},
+		{
+			"cedula": "345",
+			"email": "jorge@mail",
+			"nombre": "jorge ",
+			"genero" : "MASCULINO"
+
+		},
+		{
+			"cedula": "21111",
+			"email": "hotmail@mail",
+			"nombre": "hotmail "
+		},
+		{
+			"cedula": "3245",
+			"email": "gmaila@mail",
+			"nombre": "juano ",
+			"genero" : "FEMENINO"
+		}
+	]
+}

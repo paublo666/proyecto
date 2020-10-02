@@ -1,0 +1,24 @@
+{
+	"marca": [
+		{
+			"id_marca": 1,
+			"nombre_marca": "chevrolet"
+		},
+		{
+			"id_marca": 2,
+			"nombre_marca": "nissan"
+		},
+		{
+			"id_marca": 3,
+			"nombre_marca": "toyota"
+		},
+		{
+			"id_marca": 4,
+			"nombre_marca": "renault"
+		},
+		{
+			"id_marca": 5, 
+			"nombre_marca": "mazda"
+		}
+	]
+}
