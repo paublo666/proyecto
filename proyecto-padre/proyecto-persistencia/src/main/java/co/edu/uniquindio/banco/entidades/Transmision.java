@@ -2,6 +2,6 @@ package co.edu.uniquindio.banco.entidades;
 
 public enum Transmision {
 	
-	MECANICA,AUTOMATICA
+	MECANICA,AUTOMATICA,MECANICO,AUTOMATICO 
 
 }

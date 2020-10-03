@@ -20,7 +20,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import co.edu.uniquindio.banco.entidades.Genero;
 
 @RunWith(Arquillian.class)
 
@@ -43,6 +42,7 @@ public class ModeloTest {
 	
 	@Test
 	public void test () {
+		
 		
 	}
 	
