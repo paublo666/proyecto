@@ -1,0 +1,19 @@
+{
+	"favorito": [
+		{
+			"id_favorito": 1,
+			"id_vehiculo": 1,
+			"id_persona": 1
+		},
+		{
+			"id_favorito": 2,
+			"id_vehiculo": 1,
+			"id_persona": 2
+		},
+		{
+		    "id_favorito": 1,
+			"id_vehiculo": 1,
+			"id_persona": 1
+		}
+	]
+}
