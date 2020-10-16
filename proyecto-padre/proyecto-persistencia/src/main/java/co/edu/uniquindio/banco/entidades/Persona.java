@@ -36,9 +36,9 @@ public class Persona implements Serializable {
 	@ManyToOne
 	private Ciudad ciudad ;
 	
-	
 	@ElementCollection
 	private java.util.Map<String,Integer> telefonos;
+	
 	
 	@OneToMany(mappedBy = "idpersona")
 	private java.util.List<Vehiculo> vehiculos;

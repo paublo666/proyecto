@@ -2,9 +2,14 @@ package co.edu.uniquindio.banco.prueba;
 
 import javax.persistence.EntityManager;
 import java.util.HashMap;
+import java.util.List;
+
 import co.edu.uniquindio.banco.entidades.*;
 import java.util.Map;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.UsingDataSet;
@@ -23,7 +28,6 @@ import org.junit.runner.RunWith;
 import co.edu.uniquindio.banco.entidades.Genero;
 
 @RunWith(Arquillian.class)
-
 public class ModeloTest {
 
 	@PersistenceContext
@@ -44,6 +48,33 @@ public class ModeloTest {
 	@Test
 	public void test () {
 		
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({"persona.json", "vehiculo.json", "ciudad.json","modelo.json"})
+	public void listaTest ()
+	{
+		TypedQuery<Vehiculo> q = entitymanager.createNamedQuery("TODOS_VEHICULOS", Vehiculo.class);
+		List <Vehiculo> l = q.getResultList();
+		
+		for (Vehiculo v : l) {
+		System.out.println(v.getNombre_vehiculo()+ " "+ v.getPrecio());
+		}
+	}
+	
+	@Test
+	@Transactional(value = TransactionMode.ROLLBACK)
+	@UsingDataSet({"persona.json", "vehiculo.json", "ciudad.json","modelo.json"})
+	public void listaVehiculoTransmisionTest ()
+	{
+		TypedQuery<Vehiculo> q = entitymanager.createNamedQuery("VEHICULOS_TRANSMISION", Vehiculo.class);
+		q.setParameter("t", Transmision.AUTOMATICA);
+		List <Vehiculo> l = q.getResultList();
+		
+		for (Vehiculo v : l) {
+		System.out.println(v.getNombre_vehiculo()+ " "+ v.getPrecio());
+		}
 	}
 	
 	@Test
@@ -70,15 +101,14 @@ public class ModeloTest {
 	
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
-	@UsingDataSet({"persona.json", "vehiculo.json", "marca.json", "modelo.json", "ciudad.json"})
+	@UsingDataSet({"persona.json", "vehiculo.json", "modelo.json", "ciudad.json"})
 	public void RegistrarVehiculoTest ()
 	{
 		Ciudad c = entitymanager.find(Ciudad.class, 1);
 		Persona p = entitymanager.find(Persona.class, 1);
-		Marca m = entitymanager.find(Marca.class, 1);
 		Modelo mod = entitymanager.find(Modelo.class, 1);
 		
-		Vehiculo v = new Vehiculo(1, 2.0000000, "vehiculo en buen estado", 2020, "01-10-2020", "chevrolet spark", "verde", p, c, mod, m,TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA);
+		Vehiculo v = new Vehiculo(1, 2.0000000, "vehiculo en buen estado", 2020, "01-10-2020", "chevrolet spark", "verde", p, c, mod, TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA);
 
 		entitymanager.persist(v);
 		
@@ -104,6 +134,7 @@ public class ModeloTest {
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({"persona.json"})
+	
 	public void actualizarPersonaTest ()
 	{
 		Persona p = entitymanager.find(Persona.class, 1);
@@ -114,10 +145,8 @@ public class ModeloTest {
 		Assert.assertEquals("juan", pbuscado.getNombre());
 		
 	}
-	
-	
-	
-	@Ignore
+
+	@Ignore  
 	@Test
 	@Transactional(value = TransactionMode.COMMIT)
 	public void persistenciaPersonaTest() {

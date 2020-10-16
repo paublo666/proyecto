@@ -11,7 +11,6 @@
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
-			"id_marca": 1,
 			"TIPOVEHICULO": "CARRO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
 			"TRANSMISION": "MECANICA"
@@ -27,7 +26,6 @@
 			"id_persona": 2,
 			"id_ciudad": 1,
 			"id_modelo": 1,
-			"id_marca": 1,
 			"TIPOVEHICULO": "CAMIONETA",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
 			"TRANSMISION": "MECANICA"
@@ -43,7 +41,6 @@
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
-			"id_marca": 1,
 			"TIPOVEHICULO": "CAMPERO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
 			"TRANSMISION": "AUTOMATICA"
@@ -59,7 +56,6 @@
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
-			"id_marca": 1,
 			"TIPOVEHICULO": "MOTO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
 			"TRANSMISION": "AUTOMATICA"

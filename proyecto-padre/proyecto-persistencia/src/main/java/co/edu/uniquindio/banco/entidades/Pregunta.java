@@ -87,6 +87,5 @@ public class Pregunta implements Serializable {
 			return false;
 		return true;
 	}
-	
-   
+
 }

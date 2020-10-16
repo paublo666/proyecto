@@ -74,8 +74,9 @@ public class Ciudad implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-   
+	@Override
+	public String toString() {
+		return "Ciudad [codigo=" + codigo + ", nombre=" + nombre + "]";
+	}
 	
 }

@@ -1,24 +1,24 @@
 {
-	"marca": [
+	"modelo": [
 		{
 			"id_modelo": 1,
-			"nombre_modelo": 1996
+			"nombre_modelo": "chevrolet spark"
 		},
 		{
 			"id_modelo": 2,
-			"nombre_modelo": 1995
+			"nombre_modelo": "renault sandero"
 		},
 		{
 			"id_modelo": 3,
-			"nombre_modelo": 1994
+			"nombre_modelo": "toyota gt"
 		},
 		{
 			"id_modelo": 4,
-			"nombre_modelo": 1997
+			"nombre_modelo": "mitsubishi montero"
 		},
 		{
 			"id_modelo": 5,
-			"nombre_modelo": 1998
+			"nombre_modelo": "carro normal"
 		}
 	]
 }

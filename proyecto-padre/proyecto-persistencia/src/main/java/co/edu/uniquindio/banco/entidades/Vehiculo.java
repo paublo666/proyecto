@@ -14,7 +14,10 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name = "TODOS_VEHICULOS", query = "select v from Vehiculo v "),
+	@NamedQuery(name = "VEHICULOS_TRANSMISION", query ="select v from Vehiculo v where v.transmision= : t")
+})
 public class Vehiculo implements Serializable {
 
 	@Id
@@ -59,9 +62,8 @@ public class Vehiculo implements Serializable {
 	@JoinColumn(name = "id_modelo")
 	private Modelo modelo;
 	
-	@ManyToOne
-	@JoinColumn(name= "id_marca")
-	private Marca marca;
+	@ManyToMany
+	private List<Caracteristica> caracteristica;
 	
 	@OneToMany(mappedBy = "vehiculo")
 	private List<Favorito> favoritos;
@@ -81,11 +83,10 @@ public class Vehiculo implements Serializable {
 	@OneToMany(mappedBy = "vehiculo")
 	private List<Pregunta> preguntas;
 	
-	
 
 	public Vehiculo(Integer idvehiculo, Double precio, String descripcion, Integer anio, String fecha,
 			String nombre_vehiculo, String color, Persona idpersona, Ciudad ciudad,
-			Modelo modelo, Marca marca, TipoVehiculo tipovehiculo, TipoCombustible tipocombustible,
+			Modelo modelo, TipoVehiculo tipovehiculo, TipoCombustible tipocombustible,
 			Transmision transmision) {
 		super();
 		this.idvehiculo = idvehiculo;
@@ -98,7 +99,6 @@ public class Vehiculo implements Serializable {
 		this.idpersona = idpersona;
 		this.ciudad = ciudad;
 		this.modelo = modelo;
-		this.marca = marca;
 		this.tipovehiculo = tipovehiculo;
 		this.tipocombustible = tipocombustible;
 		this.transmision = transmision;
@@ -123,7 +123,14 @@ public class Vehiculo implements Serializable {
 	public String getDescripcion() {
 		return this.descripcion;
 	}
+	
 
+	public String getNombre_vehiculo() {
+		return nombre_vehiculo;
+	}
+	public void setNombre_vehiculo(String nombre_vehiculo) {
+		this.nombre_vehiculo = nombre_vehiculo;
+	}
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}   
@@ -133,6 +140,80 @@ public class Vehiculo implements Serializable {
 
 	public void setAnio(Integer anio) {
 		this.anio = anio;
+	}
+	
+	
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	public String getColor() {
+		return color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
+	public java.util.Map<String, Integer> getFotos() {
+		return fotos;
+	}
+	public void setFotos(java.util.Map<String, Integer> fotos) {
+		this.fotos = fotos;
+	}
+	public Persona getIdpersona() {
+		return idpersona;
+	}
+	public void setIdpersona(Persona idpersona) {
+		this.idpersona = idpersona;
+	}
+	public Ciudad getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
+	}
+	public Modelo getModelo() {
+		return modelo;
+	}
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
+	}
+	public List<Caracteristica> getCaracteristica() {
+		return caracteristica;
+	}
+	public void setCaracteristica(List<Caracteristica> caracteristica) {
+		this.caracteristica = caracteristica;
+	}
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+	public TipoVehiculo getTipovehiculo() {
+		return tipovehiculo;
+	}
+	public void setTipovehiculo(TipoVehiculo tipovehiculo) {
+		this.tipovehiculo = tipovehiculo;
+	}
+	public TipoCombustible getTipocombustible() {
+		return tipocombustible;
+	}
+	public void setTipocombustible(TipoCombustible tipocombustible) {
+		this.tipocombustible = tipocombustible;
+	}
+	public Transmision getTransmision() {
+		return transmision;
+	}
+	public void setTransmision(Transmision transmision) {
+		this.transmision = transmision;
+	}
+	public List<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+	public void setPreguntas(List<Pregunta> preguntas) {
+		this.preguntas = preguntas;
 	}
 	@Override
 	public int hashCode() {
@@ -161,7 +242,7 @@ public class Vehiculo implements Serializable {
 	public String toString() {
 		return "Vehiculo [idvehiculo=" + idvehiculo + ", precio=" + precio + ", descripcion=" + descripcion + ", anio="
 				+ anio + ", fecha=" + fecha + ", nombre_vehiculo=" + nombre_vehiculo + ", color=" + color
-				+ ", idpersona=" + idpersona + ", ciudad=" + ciudad + ", modelo=" + modelo + ", marca=" + marca
+				+ ", idpersona=" + idpersona + ", ciudad=" + ciudad + ", modelo=" + modelo 
 				+ ", tipovehiculo=" + tipovehiculo + ", tipocombustible=" + tipocombustible + ", transmision="
 				+ transmision + "]";
 	}

@@ -21,8 +21,8 @@ public class Modelo implements Serializable {
 	@Column(name = "id_modelo")
 	private Integer id_modelo;
 	
-	@Column(name = "nombre_modelo")
-	private Integer nombre;
+	@Column(name = "nombre_modelo", nullable = false)
+	private String nombre;
 	
 	@OneToMany(mappedBy = "modelo")
 	private List<Vehiculo> vehiculos;
@@ -38,11 +38,11 @@ public class Modelo implements Serializable {
 	public void setId_modelo(Integer id_modelo) {
 		this.id_modelo = id_modelo;
 	}   
-	public Integer getNombre() {
+	public String getNombre() {
 		return this.nombre;
 	}
 
-	public void setNombre(Integer nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 	@Override
@@ -67,6 +67,10 @@ public class Modelo implements Serializable {
 		} else if (!id_modelo.equals(other.id_modelo))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {
+		return "Modelo [id_modelo=" + id_modelo + ", nombre=" + nombre + "]";
 	}
 	
 	
