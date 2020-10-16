@@ -16,7 +16,6 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name = "TODOS_VEHICULOS", query = "select v from Vehiculo v "),
-	@NamedQuery(name = "VEHICULOS_TRANSMISION", query ="select v from Vehiculo v where v.transmision= : t")
 })
 public class Vehiculo implements Serializable {
 

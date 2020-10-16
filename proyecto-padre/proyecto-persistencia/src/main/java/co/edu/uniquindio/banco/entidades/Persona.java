@@ -11,6 +11,8 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQueries({
+})
 
 public class Persona implements Serializable {
 

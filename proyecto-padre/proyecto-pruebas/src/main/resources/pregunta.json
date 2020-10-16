@@ -1,0 +1,28 @@
+{
+	"pregunta": [
+		{
+			"id_pregunta": 1,
+			"texto_pregunta": "hola quisiera saber el precio",
+			"fecha_pregunta": "26/12/19",
+			"id_vehiculo": 1,
+			"id_persona": 1,
+			"pregunta": 1
+		},
+		{
+			"id_pregunta": 2,
+			"texto_pregunta": "cual es el precio ",
+			"fecha_pregunta": "26/12/19",
+			"id_vehiculo": 1,
+			"id_persona": 1,
+			"pregunta": 1
+		},
+		{
+			"id_pregunta": 3,
+			"texto_pregunta": " en que ciudad reside",
+			"fecha_pregunta": "26/12/19",
+			"id_vehiculo": 1,
+			"id_persona": 1,
+			"pregunta": 1
+		}
+	]
+}

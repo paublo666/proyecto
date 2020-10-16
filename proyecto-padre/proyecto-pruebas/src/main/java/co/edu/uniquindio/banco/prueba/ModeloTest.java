@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 
-import co.edu.uniquindio.banco.entidades.Genero;
 
 @RunWith(Arquillian.class)
 public class ModeloTest {
@@ -63,13 +62,14 @@ public class ModeloTest {
 		}
 	}
 	
+	@Ignore
 	@Test
 	@Transactional(value = TransactionMode.ROLLBACK)
 	@UsingDataSet({"persona.json", "vehiculo.json", "ciudad.json","modelo.json"})
 	public void listaVehiculoTransmisionTest ()
 	{
 		TypedQuery<Vehiculo> q = entitymanager.createNamedQuery("VEHICULOS_TRANSMISION", Vehiculo.class);
-		q.setParameter("t", Transmision.AUTOMATICA);
+		q.setParameter("t", Transmision.AUTOMATICO);
 		List <Vehiculo> l = q.getResultList();
 		
 		for (Vehiculo v : l) {
