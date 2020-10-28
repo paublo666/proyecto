@@ -2,63 +2,63 @@
 	"vehiculo": [
 		{
 			"idvehiculo": 1,
-			"precio": 123.132,
+			"precio": 20000000,
 			"id_ciudad": 1,
 			"descripcion": "vehiculo en muy buen estado",
 			"anio": 1995,
 			"fecha_publicacion": "12/05/19",
-			"nombre_vehiculo": "chevrolet spark",
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
 			"TIPOVEHICULO": "CARRO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
-			"TRANSMISION": "MECANICA"
+			"TRANSMISION": "MECANICA",
+			"placa": "abc123"
 		},
 		{
 			"idvehiculo": 2,
-			"precio": 666.132,
+			"precio": 24000000,
 			"descripcion": "vehiculo muy bueno ",
 			"anio": 1995,
 			"fecha_publicacion": "23/03/19",
-			"nombre_vehiculo": "toyota prado",
 			"color_vehiculo": "azul",
 			"id_persona": 2,
 			"id_ciudad": 1,
 			"id_modelo": 1,
-			"TIPOVEHICULO": "CAMIONETA",
+			"TIPOVEHICULO": "CARRO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
-			"TRANSMISION": "MECANICA"
+			"TRANSMISION": "MECANICA",
+			"placa": "ab3453"
 		},
 		{
 			"idvehiculo": 3,
-			"precio": 888.132,
+			"precio": 32000000,
 			"id_ciudad": 1,
 			"descripcion": "cse vende campero modelo 2005",
 			"anio": 2005,
 			"fecha_publicacion": "12/10/19",
-			"nombre_vehiculo": "mitsubishi montero",
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
 			"TIPOVEHICULO": "CAMPERO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
-			"TRANSMISION": "AUTOMATICA"
+			"TRANSMISION": "AUTOMATICO",
+			"placa": "abc12323"
 		},
 		{
 			"idvehiculo": 4,
-			"precio": 12398,
+			"precio": 40000000,
 			"id_ciudad": 1,
 			"descripcion": "MOTO EN EXCELENTE ESTADO",
 			"anio": 2020,
 			"fecha_publicacion": "12/12/19",
-			"nombre_vehiculo": "moto BMW",
 			"color_vehiculo": "azul",
 			"id_persona": 1,
 			"id_modelo": 1,
 			"TIPOVEHICULO": "MOTO",
 			"TIPOCOMBUSTIBLE": "GASOLINA",
-			"TRANSMISION": "AUTOMATICA"
+			"TRANSMISION": "AUTOMATICO",
+			"placa": "ab23"
 		}
 	]
 }

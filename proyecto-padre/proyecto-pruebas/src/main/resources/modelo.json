@@ -2,23 +2,28 @@
 	"modelo": [
 		{
 			"id_modelo": 1,
-			"nombre_modelo": "chevrolet spark"
+			"nombre_modelo": "chevrolet spark",
+			"id_marca": 1
 		},
 		{
 			"id_modelo": 2,
-			"nombre_modelo": "renault sandero"
+			"nombre_modelo": "renault sandero",
+			"id_marca": 2
 		},
 		{
 			"id_modelo": 3,
-			"nombre_modelo": "toyota gt"
+			"nombre_modelo": "toyota gt",
+			"id_marca": 3
 		},
 		{
 			"id_modelo": 4,
-			"nombre_modelo": "mitsubishi montero"
+			"nombre_modelo": "mitsubishi montero",
+			"id_marca": 4
 		},
 		{
 			"id_modelo": 5,
-			"nombre_modelo": "carro normal"
+			"nombre_modelo": "moto bmw",
+			"id_marca": 5
 		}
 	]
 }

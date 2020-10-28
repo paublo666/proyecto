@@ -16,15 +16,17 @@ import javax.persistence.*;
 public class Caracteristica implements Serializable {
 	
 	@ManyToMany
-	private List<Vehiculo> vehiculo;
+	private List<Vehiculo> vehiculos;
 
 	@GeneratedValue 
-	@Column (name = "id_caracteristica", nullable = false)
+	@Column (name = "id_caracteristica")
 	@Id
 	private Integer id_caracteristica;
 	
 	@Column(name = "detalle_caracteristica")
 	private String detalle_caracteristica;
+	
+	
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -69,6 +71,13 @@ public class Caracteristica implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Caracteristica [id_caracteristica=" + id_caracteristica + ", detalle_caracteristica="
+				+ detalle_caracteristica + "]";
+	}
+	
+	
    
 	
 }

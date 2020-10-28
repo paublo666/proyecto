@@ -3,6 +3,7 @@ package co.edu.uniquindio.banco.entidades;
 import java.io.Serializable;
 import java.lang.String;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
@@ -12,6 +13,11 @@ import javax.persistence.*;
  */
 @Entity
 @NamedQueries({
+	@NamedQuery(name = "AUTENTICAR PERSONA", query = "select p from Persona p where p.email = :email and p.clave = :clave"),
+	@NamedQuery(name = "LISTA_PERSONA_FAVORITOS", query = "select f.vehiculo from Persona p join p.favoritos f where p.email = :email"),
+    @NamedQuery(name = "LISTA_PERSONAS_ORDENADA", query = "select p from Persona p order by p.nombre asc"),
+    @NamedQuery(name = "BUSCAR_POR_EMAIL", query = "select p from Persona p where p.email = :email"),
+    @NamedQuery(name = "COUNT_PERSONAS", query = "select count (p) from Persona p")
 })
 
 public class Persona implements Serializable {
@@ -54,15 +60,17 @@ public class Persona implements Serializable {
 	
 	
 
-	public Persona(Integer id, String nombre, String email, String clave, String direccion, Ciudad ciudad) {
+	public Persona(String nombre, String email, String clave, String direccion, Ciudad ciudad,
+			Map<String, Integer> telefonos) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.clave = clave;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
+		this.telefonos = telefonos;
 	}
+
 	public Persona() {
 		super();
 	}   

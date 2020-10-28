@@ -87,5 +87,13 @@ public class Pregunta implements Serializable {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Pregunta [id_pregunta=" + id_pregunta + ", texto_pregunta=" + texto_pregunta + ", fecha_pregunta="
+				+ fecha_pregunta + ", vehiculo=" + vehiculo + ", persona=" + persona + "]";
+	}
 
+	
+
+	
 }

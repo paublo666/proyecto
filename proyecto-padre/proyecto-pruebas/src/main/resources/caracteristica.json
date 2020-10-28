@@ -1,0 +1,24 @@
+{
+	"caracteristica": [
+		{
+			"id_caracteristica": 1,
+			"detalle_caracteristica": "gps"
+		},
+		{
+			"id_caracteristica": 2,
+			"detalle_caracteristica": "sensor de reversa"
+		},
+		{
+			"id_caracteristica": 3,
+			"detalle_caracteristica": "frenos ABS"
+		},
+		{
+			"id_caracteristica": 4,
+			"detalle_caracteristica": "motor con 3.000.000 de caballos de fuerza"
+		},
+		{
+			"id_caracteristica": 5,
+			"detalle_caracteristica": "puertas se abren hacia arriba"
+		}
+	]
+}

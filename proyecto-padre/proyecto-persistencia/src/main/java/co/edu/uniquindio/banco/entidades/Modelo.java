@@ -26,6 +26,10 @@ public class Modelo implements Serializable {
 	
 	@OneToMany(mappedBy = "modelo")
 	private List<Vehiculo> vehiculos;
+	
+	@JoinColumn(name = "id_marca", nullable = false)
+	private Marca id_marca;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Modelo() {
@@ -38,6 +42,13 @@ public class Modelo implements Serializable {
 	public void setId_modelo(Integer id_modelo) {
 		this.id_modelo = id_modelo;
 	}   
+	
+	public Marca getId_marca() {
+		return id_marca;
+	}
+	public void setId_marca(Marca id_marca) {
+		this.id_marca = id_marca;
+	}
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -70,9 +81,8 @@ public class Modelo implements Serializable {
 	}
 	@Override
 	public String toString() {
-		return "Modelo [id_modelo=" + id_modelo + ", nombre=" + nombre + "]";
+		return "Modelo [id_modelo=" + id_modelo + ", nombre=" + nombre + ", id_marca=" + id_marca + "]";
 	}
-	
 	
    
 }

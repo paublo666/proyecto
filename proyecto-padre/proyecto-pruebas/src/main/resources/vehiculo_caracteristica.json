@@ -1,0 +1,32 @@
+{
+	"vehiculo_caracteristica": [
+		{
+			"Vehiculo_idvehiculo": 1,
+			"caracteristicas_id_caracteristica": 1
+		},
+				{
+			"Vehiculo_idvehiculo": 1,
+			"caracteristicas_id_caracteristica": 2
+		},
+				{
+			"Vehiculo_idvehiculo": 1,
+			"caracteristicas_id_caracteristica": 3 
+		},
+				{
+			"Vehiculo_idvehiculo": 2,
+			"caracteristicas_id_caracteristica": 1
+		},
+				{
+			"Vehiculo_idvehiculo": 3,
+			"caracteristicas_id_caracteristica": 1
+		},
+				{
+			"Vehiculo_idvehiculo": 4,
+			"caracteristicas_id_caracteristica": 1
+		},
+				{
+			"Vehiculo_idvehiculo": 4,
+			"caracteristicas_id_caracteristica": 2
+		}
+	]
+}
