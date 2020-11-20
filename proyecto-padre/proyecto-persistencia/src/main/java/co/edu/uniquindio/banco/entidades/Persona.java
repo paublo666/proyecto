@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Entity implementation class for Entity: Persona
@@ -17,7 +18,9 @@ import javax.persistence.*;
 	@NamedQuery(name = "LISTA_PERSONA_FAVORITOS", query = "select f.vehiculo from Persona p join p.favoritos f where p.email = :email"),
     @NamedQuery(name = "LISTA_PERSONAS_ORDENADA", query = "select p from Persona p order by p.nombre asc"),
     @NamedQuery(name = "BUSCAR_POR_EMAIL", query = "select p from Persona p where p.email = :email"),
-    @NamedQuery(name = "COUNT_PERSONAS", query = "select count (p) from Persona p")
+    @NamedQuery(name = "COUNT_PERSONAS", query = "select count (p) from Persona p"),
+    @NamedQuery(name = "LISTA_PERSONAS", query = "select p from Persona p")
+
 })
 
 public class Persona implements Serializable {
@@ -27,12 +30,14 @@ public class Persona implements Serializable {
 	@Column(name = "id", length = 100, nullable = false)
 	private Integer id;
 	
+	@NotBlank(message = "el nombre no puede ser vacio")
 	@Column(name = "nombre", length = 200, nullable = false)
 	private String nombre;
 	
 	@Column(name = "email", length = 100, nullable = false, unique = true)
 	private String email;
 	
+	@NotBlank(message = "la clave no puede ser vacio")
 	@Column(name = "clave", length = 100, nullable = false)
 	private String clave;
 	
@@ -109,6 +114,48 @@ public class Persona implements Serializable {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+	
+	
+	public Ciudad getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(Ciudad ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public java.util.Map<String, Integer> getTelefonos() {
+		return telefonos;
+	}
+
+	public void setTelefonos(java.util.Map<String, Integer> telefonos) {
+		this.telefonos = telefonos;
+	}
+
+	public java.util.List<Vehiculo> getVehiculos() {
+		return vehiculos;
+	}
+
+	public void setVehiculos(java.util.List<Vehiculo> vehiculos) {
+		this.vehiculos = vehiculos;
+	}
+
+	public List<Favorito> getFavoritos() {
+		return favoritos;
+	}
+
+	public void setFavoritos(List<Favorito> favoritos) {
+		this.favoritos = favoritos;
+	}
+
+	public List<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+
+	public void setPreguntas(List<Pregunta> preguntas) {
+		this.preguntas = preguntas;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

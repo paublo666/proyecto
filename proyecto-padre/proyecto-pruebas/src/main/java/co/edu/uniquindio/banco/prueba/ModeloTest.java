@@ -59,10 +59,11 @@ public class ModeloTest {
 		Ciudad c = entitymanager.find(Ciudad.class, 1);
 		Persona p = entitymanager.find(Persona.class, 1);
 		Modelo mod = entitymanager.find(Modelo.class, 1);
-		Vehiculo v = new Vehiculo(1, 2.0000000, "vehiculo en buen estado", 2020, "01-10-2020", "verde", p, c, mod, TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA, "abc123");
+		//Vehiculo v = new Vehiculo(1, 20000000, "vehiculo en buen estado", 2020, "01-10-2020", "verde", p, c, mod, TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA, "abc123");
 
-		String s = v.getModelo().getId_marca().getNombre_marca();
-		System.out.println(s);	
+		//v.setNuevo(true);
+		//String s = v.getModelo().getId_marca().getNombre_marca();
+		//System.out.println(s);	
 	}
 
 	@Test
@@ -355,9 +356,9 @@ public class ModeloTest {
 		Persona p = entitymanager.find(Persona.class, 1);
 		Modelo mod = entitymanager.find(Modelo.class, 1);
 
-		Vehiculo v = new Vehiculo(1, 2.0000000, "vehiculo en buen estado", 2020, "01-10-2020", "verde", p, c, mod, TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA, "abc123");
+		//Vehiculo v = new Vehiculo(1, 2.0000000, "vehiculo en buen estado", 2020, "01-10-2020", "verde", p, c, mod, TipoVehiculo.CARRO, TipoCombustible.GASOLINA,Transmision.MECANICA, "abc123");
 
-		entitymanager.persist(v);
+		//entitymanager.persist(v);
 
 		Vehiculo vbuscado = entitymanager.find(Vehiculo.class, 1);
 		Assert.assertNotNull(vbuscado);

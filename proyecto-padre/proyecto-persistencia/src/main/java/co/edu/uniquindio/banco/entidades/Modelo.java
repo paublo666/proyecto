@@ -12,6 +12,10 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "LISTA_MODELOS", query = "select m from Modelo m" )
+	})
+
 
 public class Modelo implements Serializable {
 

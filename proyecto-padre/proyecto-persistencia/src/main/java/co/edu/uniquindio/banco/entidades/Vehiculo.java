@@ -1,13 +1,14 @@
 package co.edu.uniquindio.banco.entidades;
 
 import java.io.Serializable;
-import java.lang.Double;
 import java.lang.Integer;
 import java.lang.String;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Entity implementation class for Entity: Vehiculo
@@ -30,7 +31,10 @@ import javax.persistence.*;
 	//retorna el numero de vehiculos que tienen almenos una caractreristica q se pasa por parametro 
 	@NamedQuery(name = "CUENTA_CARACTERISTICAS", query = "select count (v) from Vehiculo v join v.caracteristicas c where c.id_caracteristica IN :lista group by v"),
 	@NamedQuery(name = "VEHICULOS_POR_MARCA", query = "select v from Vehiculo v where v.modelo.id_marca.nombre_marca = :marca group by v"),
-	@NamedQuery(name = "VEHICULOS_POR_TIPO", query = "select v from Vehiculo v where v.tipovehiculo = :tipo group by v")
+	@NamedQuery(name = "VEHICULOS_POR_TIPO", query = "select v from Vehiculo v where v.tipovehiculo = :tipo group by v"),
+	@NamedQuery(name = "BUSCAR_POR_PLACA", query = "select v from Vehiculo v where v.placa = :placa"),
+	@NamedQuery(name = "BUSCAR", query = "select v from Vehiculo v where v.nombre_publicacion like :busqueda"),
+
 
 })
 public class Vehiculo implements Serializable {
@@ -40,21 +44,34 @@ public class Vehiculo implements Serializable {
 	@Column(name = "idvehiculo", nullable = false)
 	private Integer idvehiculo;
 	
-	@Column(name = "precio", nullable = false)
-	private Double precio;
+	@NotBlank(message = "nombre de la publicacion no puede ser vacio")
+	@Column(name = "nombre_publicacion", length = 100, nullable = false)
+	private String nombre_publicacion;
 	
+	@NotNull(message = "ingrese el precio")
+	@Column(name = "precio", nullable = false)
+	private Long precio;
+	
+	@NotNull(message = "seleccione una opcion")
+	@Column(name = "nuevo", nullable = false)
+	private boolean nuevo;
+	
+	@NotBlank(message = "la descripcion no puede ser vacio")
 	@Column(name = "descripcion", length = 100, nullable = false)
 	private String descripcion;
 	
+	@NotNull(message = "ingrese el anio del vehiculo")
 	@Column(name = "anio", nullable = false)
 	private Integer anio;
 	
+	@NotBlank(message = "la placa no puede ser vacio")
 	@Column(name = "placa", nullable = false, unique = true)
 	private String placa;
 	
-	@Column(name="fecha_publicacion", nullable = false)
-	private String fecha;
+	@Column(name="fecha_publicacion")
+	private Date fecha;
 	
+	@NotBlank(message = "el color no puede ser vacio")
 	@Column(name="color_vehiculo", nullable = false)
 	private String color;
 	
@@ -67,7 +84,6 @@ public class Vehiculo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "id_persona")
 	private Persona idpersona;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_ciudad", nullable = false)
@@ -91,6 +107,7 @@ public class Vehiculo implements Serializable {
 	@JoinColumn(name =" tipo_combustible", nullable = false )
 	private TipoCombustible tipocombustible;
 	
+	
 	@Enumerated(EnumType.STRING)
 	@JoinColumn(name = "transmision", nullable = false)
 	private Transmision transmision ;
@@ -99,7 +116,7 @@ public class Vehiculo implements Serializable {
 	private List<Pregunta> preguntas;
 	
 
-	public Vehiculo(Integer idvehiculo, Double precio, String descripcion, Integer anio, String fecha,
+	public Vehiculo(Integer idvehiculo, Long precio, String descripcion, Integer anio, Date fecha,
 			 String color, Persona idpersona, Ciudad ciudad,
 			Modelo modelo, TipoVehiculo tipovehiculo, TipoCombustible tipocombustible,
 			Transmision transmision, String placa) {
@@ -128,11 +145,30 @@ public class Vehiculo implements Serializable {
 	public void setIdvehiculo(Integer idvehiculo) {
 		this.idvehiculo = idvehiculo;
 	}   
-	public Double getPrecio() {
+	
+	public boolean isNuevo() {
+		return nuevo;
+	}
+	public void setNuevo(boolean nuevo) {
+		this.nuevo = nuevo;
+	}
+	public String getNombre_publicacion() {
+		return nombre_publicacion;
+	}
+	public void setNombre_publicacion(String nombre_publicacion) {
+		this.nombre_publicacion = nombre_publicacion;
+	}
+	public List<Caracteristica> getCaracteristicas() {
+		return caracteristicas;
+	}
+	public void setCaracteristicas(List<Caracteristica> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+	public Long getPrecio() {
 		return this.precio;
 	}
 
-	public void setPrecio(Double precio) {
+	public void setPrecio(Long precio) {
 		this.precio = precio;
 	}   
 	public String getDescripcion() {
@@ -157,10 +193,10 @@ public class Vehiculo implements Serializable {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 	public String getColor() {

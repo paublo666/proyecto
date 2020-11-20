@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.ejb;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -8,7 +9,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import co.edu.uniquindio.banco.entidades.Ciudad;
+import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
+import co.edu.uniquindio.banco.entidades.TipoCombustible;
+import co.edu.uniquindio.banco.entidades.TipoVehiculo;
+import co.edu.uniquindio.banco.entidades.Transmision;
 import co.edu.uniquindio.banco.entidades.Vehiculo;
 import co.edu.uniquindio.proyecto.excepcion.VehiculoInexistenteException;
 
@@ -40,6 +46,16 @@ public class PersonaEJB implements PersonaEJBRemote {
 		
 	}
 	
+	public Ciudad encontrarCiudad(Integer id) {
+		return entityManager.find(Ciudad.class, id);
+	}
+	
+	public List<Ciudad> obtenerListaCiudades ()
+	{
+		TypedQuery<Ciudad> q = entityManager.createNamedQuery("LISTA_CIUDADES", Ciudad.class);
+		List<Ciudad> ciudades =q.getResultList();
+		return ciudades;
+	}
 	public boolean buscarPorEmail (String email) {
 		
 		TypedQuery<Persona> q = entityManager.createNamedQuery("BUSCAR_POR_EMAIL", Persona.class);
@@ -90,6 +106,84 @@ public class PersonaEJB implements PersonaEJBRemote {
 		}
 		entityManager.merge(v);
 		
+	}
+	
+	public boolean buscarPlaca (String placa) {
+		TypedQuery<Vehiculo> q = entityManager.createNamedQuery("BUSCAR_POR_PLACA", Vehiculo.class);
+		q.setParameter("placa",placa);
+		
+		List<Vehiculo> l = q.getResultList();
+		
+		if(l.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void registrarVehiculo(Vehiculo vehiculo) throws Exception {
+		
+		if(buscarPlaca(vehiculo.getPlaca())) {
+			throw new Exception("el vehiculo ya se encuentra registrado");
+			
+		}
+		entityManager.persist(vehiculo);
+
+	}
+
+	@Override
+	public List<TipoVehiculo> obtenerTiposVehiculos() {
+		// TODO Auto-generated method stub
+		return Arrays.asList(TipoVehiculo.values());
+	}
+
+	@Override
+	public List<TipoCombustible> obtenerTiposCombustible() {
+		// TODO Auto-generated method stub
+		return Arrays.asList(TipoCombustible.values());
+	}
+
+	@Override
+	public List<Transmision> obtenerTiposTransmision() {
+		// TODO Auto-generated method stub
+		return Arrays.asList(Transmision.values());
+	}
+
+	@Override
+	public Persona encontrarPersona(Integer id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(Persona.class, id);
+	}
+
+	@Override
+	public Modelo encontrarModelo(Integer id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(Modelo.class, id);
+	}
+
+	@Override
+	public List<Vehiculo> buscarVehiculo(String busqueda) {
+		TypedQuery<Vehiculo> q = entityManager.createNamedQuery("BUSCAR", Vehiculo.class);
+		q.setParameter("busqueda", "%"+busqueda+"%");
+		return q.getResultList();
+	}
+	
+	
+	public List<Vehiculo> listaVehiculos(){
+		
+		TypedQuery<Vehiculo> q =entityManager.createNamedQuery("TODOS_VEHICULOS", Vehiculo.class);
+		return q.getResultList();
+		
+	}
+	
+	public List<Persona> listaPersonas(){
+		TypedQuery<Persona> q= entityManager.createNamedQuery("LISTA_PERSONAS",Persona.class);
+		return q.getResultList();
+	}
+	
+	public List<Modelo> listaModelos(){
+		TypedQuery<Modelo> q= entityManager.createNamedQuery("LISTA_MODELOS",Modelo.class);
+		return q.getResultList();
 	}
 
 }

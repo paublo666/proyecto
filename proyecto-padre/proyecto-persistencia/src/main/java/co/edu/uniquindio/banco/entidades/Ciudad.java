@@ -12,9 +12,13 @@ import javax.persistence.*;
  */
 @Entity
 
+@NamedQueries({
+	@NamedQuery(name = "LISTA_CIUDADES", query = "select c from Ciudad c ")
+})
+
 public class Ciudad implements Serializable {
 	
-
+	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codigo")
 	@Id
