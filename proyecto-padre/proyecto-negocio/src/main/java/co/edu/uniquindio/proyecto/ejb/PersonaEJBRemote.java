@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
 import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
@@ -39,6 +40,8 @@ public interface PersonaEJBRemote {
 	 Persona encontrarPersona(Integer id);
 	 
 	 Modelo encontrarModelo (Integer id);
+	 
+	 Caracteristica encontrarCaracteristica(Integer id);
 
 
 }

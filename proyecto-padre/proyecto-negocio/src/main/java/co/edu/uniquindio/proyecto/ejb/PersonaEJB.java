@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
 import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
@@ -43,6 +44,12 @@ public class PersonaEJB implements PersonaEJBRemote {
 		}
 		
 		entityManager.persist(persona);
+		
+	}
+	
+	public List<Caracteristica> listaCaracteristicas(){
+		TypedQuery<Caracteristica> q= entityManager.createNamedQuery("LISTA_CARACTERISTICAS",Caracteristica.class);
+		return q.getResultList();
 		
 	}
 	
@@ -159,6 +166,10 @@ public class PersonaEJB implements PersonaEJBRemote {
 	public Modelo encontrarModelo(Integer id) {
 		// TODO Auto-generated method stub
 		return entityManager.find(Modelo.class, id);
+	}
+	
+	public Caracteristica encontrarCaracteristica(Integer id) {
+		return entityManager.find(Caracteristica.class,id);
 	}
 
 	@Override

@@ -1,63 +1,71 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Registrar Persona</title>
-</h:head>
-<h:body>
-
-	<h:form>
-
-		<h:panelGrid columns="3" cellpadding="10">
-
-			<p:outputLabel for="nombre_persona" value="Nombre" />
-			<p:inputText id="nombre_persona"
-				value="#{personaBean.persona.nombre}" />
-			<p:message for="nombre_persona" />
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 
-			<p:outputLabel for="direccion_persona" value="Direccion" />
-			<p:inputText id="direccion_persona"
-				value="#{personaBean.persona.direccion}" />
-			<p:message for="direccion_persona" />
+<ui:composition template="/WEB-INF/template.xhtml">
 
-			<p:outputLabel for="ciudad_persona" value="Ciudad" />
-			<p:selectOneMenu id="ciudad_persona"
-				value="#{personaBean.persona.ciudad}" required="true"
-				converter="#{ciudadConverter}">
-				<f:selectItem itemLabel="seleccione una ciudad"
-					noSelectionOption="true" />
-				<f:selectItems value="#{personaBean.ciudades}" var="ciudad"
-					itemLabel="#{ciudad.nombre}"  />
-			</p:selectOneMenu>
-			<p:message for="ciudad_persona" />
+	<ui:define name="title">Unimotor-Registrar Persona</ui:define>
 
+	<ui:define name="content">
+	
+	<p:panel header="Registro de Personas">
 
-			<p:outputLabel for="email_persona" value="Email" />
-			<p:inputText id="email_persona" value="#{personaBean.persona.email}"
-				required="true"
-				validatorMessage="el email debe tener entre 5 y 150 caracteres" />
-			<p:message for="email_persona" />
+		<h:form>
+
+			<h:panelGrid columns="3" cellpadding="10">
+
+				<p:outputLabel for="nombre_persona" value="Nombre" />
+				<p:inputText id="nombre_persona"
+					value="#{personaBean.persona.nombre}" />
+				<p:message for="nombre_persona" />
 
 
-			<p:outputLabel for="clave_persona" value="Clave" />
-			<p:password id="clave_persona" value="#{personaBean.persona.clave}" />
-			<p:message for="clave_persona" />
+				<p:outputLabel for="direccion_persona" value="Direccion" />
+				<p:inputText id="direccion_persona"
+					value="#{personaBean.persona.direccion}" />
+				<p:message for="direccion_persona" />
 
-		</h:panelGrid>
+				<p:outputLabel for="ciudad_persona" value="Ciudad" />
+				<p:selectOneMenu id="ciudad_persona"
+					value="#{personaBean.persona.ciudad}" required="true"
+					converter="#{ciudadConverter}">
+					<f:selectItem itemLabel="seleccione una ciudad"
+						noSelectionOption="true" />
+					<f:selectItems value="#{personaBean.ciudades}" var="ciudad"
+						itemLabel="#{ciudad.nombre}" />
+				</p:selectOneMenu>
+				<p:message for="ciudad_persona" />
 
-		<p:commandButton value="REGISTRAR"
-			action="#{personaBean.registrarPersona}"
-			update="@form, mensajes_registro_persona" />
 
-	</h:form>
+				<p:outputLabel for="email_persona" value="Email" />
+				<p:inputText id="email_persona" value="#{personaBean.persona.email}"
+					required="true"
+					validatorMessage="el email debe tener entre 5 y 150 caracteres" />
+				<p:message for="email_persona" />
 
-	<p:growl showDetail="true" id="mensajes_registro_persona"
-		for="mensajes_registro_persona" />
 
-</h:body>
+				<p:outputLabel for="clave_persona" value="Clave" />
+				<p:password id="clave_persona" value="#{personaBean.persona.clave}" />
+				<p:message for="clave_persona" />
+
+			</h:panelGrid>
+
+			<p:commandButton value="REGISTRAR"
+				action="#{personaBean.registrarPersona}"
+				update="@form, mensajes_registro_persona" />
+
+		</h:form>
+
+		<p:growl showDetail="true" id="mensajes_registro_persona"
+			for="mensajes_registro_persona" />
+			
+			</p:panel>
+
+	</ui:define>
+</ui:composition>
 </html>

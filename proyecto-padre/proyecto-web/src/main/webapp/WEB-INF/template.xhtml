@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="primeflex.css"></h:outputStylesheet>
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+
+	<title><ui:insert name="title">Unimotor</ui:insert></title>
+</h:head>
+
+
+<h:body>
+
+	<div id="header">
+		<div class="p-grid p-justify-center">
+			<div class="p-col-10">
+				<div class="p-grid p-align-center vertical-container">
+					<div class="p-col-2" align="center">
+						<h:form>
+							<p:commandLink action="/index?faces-redirect=true"></p:commandLink>
+							<p:graphicImage library="images" name="vehiculo.png" width="80px"></p:graphicImage>
+						</h:form>
+					</div>
+					<div class="p-col-8" align="center">
+						<h:form>
+							<div class="ui-inputgroup">
+								<p:inputText placeholder="¿Qué vehículo busca?" required="true"
+									value="#{personaBean.busqueda}"></p:inputText>
+								<p:commandButton update="@form" icon="pi pi-search"
+									action="#{personaBean.buscar}"></p:commandButton>
+							</div>
+						</h:form>
+					</div>
+					<div class="p-col-2" align="center">
+						<h:form rendered="#{!seguridadBean.autenticado}">
+							<p:commandButton value="Iniciar Sesion"
+								oncomplete="PF('form-sesion').show()" />
+						</h:form>
+						<h:form rendered="#{seguridadBean.autenticado}">
+							<p:splitButton id="basic" value="#{seguridadBean.persona.nombre}"
+								icon="pi pi-save">
+								<p:menuitem value="Ir a mi perfil" icon="pi pi-refresh" />
+								<p:menuitem value="Cerrar Sesion" icon="pi pi-times"
+									action="#{seguridadBean.cerrarSesion}" />
+							</p:splitButton>
+						</h:form>
+
+					</div>
+
+				</div>
+
+
+
+				<div>
+					<h:form>
+						<p:commandButton rendered="#{!seguridadBean.autenticado}"
+							action="registrarPersona?feces-redirect=true"
+							value="REGISTRARSE" update="@form" />
+						<p:commandButton rendered="#{seguridadBean.autenticado}"
+							action="/usuario/registrarVehiculo?faces-redirect=true"
+							value="REGISTRAR VEHICULO" />
+					</h:form>
+
+				</div>
+			</div>
+		</div>
+		<p:dialog widgetVar="form-sesion" header="Iniciar Sesion" modal="true">
+			<h:form>
+				<h:panelGrid columns="3">
+					<p:outputLabel for="email_login" value="Email"></p:outputLabel>
+					<p:inputText id="email_login" value="#{seguridadBean.emailLogin}"
+						required="true" />
+					<p:message for="email_login"></p:message>
+
+					<p:outputLabel for="password_login" value="Clave"></p:outputLabel>
+					<p:inputText id="password_login"
+						value="#{seguridadBean.passwordLogin}" required="true" />
+					<p:message for="password_login"></p:message>
+				</h:panelGrid>
+
+				<p:commandButton value="Iniciar Sesion"
+					action="#{seguridadBean.autenticarUsuario}" update="@form" />
+
+				<p:commandButton value="Recuperar Contraseña"
+					action="#{seguridadBean.enviarCorreo}" update="@form" />
+
+				<p:growl for="mensaje_sesion" showDetail="true"></p:growl>
+
+			</h:form>
+		</p:dialog>
+
+
+
+	</div>
+
+
+	<div id="content">
+
+		<div class="p-grid p-justify-center">
+			<div class="p-col-10">
+				<ui:insert name="content">
+    	Content area.  See comments below this line in the source.</ui:insert>
+			</div>
+		</div>
+
+	</div>
+
+	<div id="footer">
+		<div id="footer" align="center">
+			<p>UNIVERSIDAD DEL QUINDIO</p>
+		</div>
+	</div>
+
+</h:body>
+
+</html>

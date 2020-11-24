@@ -1,19 +1,24 @@
 package co.edu.uniquindio.unimotor.beans;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.annotation.ManagedProperty;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.shaded.commons.io.IOUtils;
+
+import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
 import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
@@ -34,7 +39,10 @@ public class PersonaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private PersonaEJB unimotorEJB;
-	private Persona persona, persona1;
+	private Persona persona;
+	@Inject
+	@ManagedProperty(value = "#{SeguridadBeam.persona}")
+	private Persona persona1;
 	private Ciudad ciudad;
 	private Vehiculo vehiculo;
 	private List<TipoVehiculo> tiposVehiculos;
@@ -50,6 +58,9 @@ public class PersonaBean implements Serializable {
 	private List<Persona> personas;
 	//lista de modelos
 	private List<Modelo> modelos;
+	private List<String> imagenes;
+	private List<Caracteristica> caracteristicas;
+	private static final String RUTA_FOTOS ="C:\\Users\\user\\Desktop\\payara5\\glassfish\\domains\\domain1\\docroot\\unimotor"; 
 
 	@Inject
 	@javax.faces.annotation.ManagedProperty(value = "#{param.busqueda}")
@@ -58,6 +69,7 @@ public class PersonaBean implements Serializable {
 
 	@PostConstruct
 	public void inicializar () {
+		caracteristicas=unimotorEJB.listaCaracteristicas();
 		modelos=unimotorEJB.listaModelos();
 		personas=unimotorEJB.listaPersonas();
 		vehiculos=unimotorEJB.listaVehiculos();
@@ -68,7 +80,6 @@ public class PersonaBean implements Serializable {
 		tiposVehiculos = unimotorEJB.obtenerTiposVehiculos();
 		tiposCombustible= unimotorEJB.obtenerTiposCombustible();
 		transmision=unimotorEJB.obtenerTiposTransmision();
-		persona1=unimotorEJB.encontrarPersona(1);
 		modelo=unimotorEJB.encontrarModelo(1);
 		if(busquedaParam!=null) {
 			lista =unimotorEJB.buscarVehiculo(busquedaParam);
@@ -79,6 +90,17 @@ public class PersonaBean implements Serializable {
 		System.out.println(lista);
 		return "resultadoBusqueda?faces-redirect=true&amp;busqueda="+busqueda;
 	}
+
+	public void subirImagenes(FileUploadEvent event) {
+		System.out.println(event.getFile().getFileName());
+	}
+	
+//	public String subirImagen(FileUploadEvent file) {
+//		inputstre
+//		IOUtils.copy(input, output);
+//
+//		return null;
+//	}
 
 
 	public void buscarVehiculo() {
@@ -102,8 +124,6 @@ public class PersonaBean implements Serializable {
 
 	public void registrarVehiculo() {
 		try {
-			vehiculo.setIdpersona(persona1);
-			vehiculo.setModelo(modelo);
 			unimotorEJB.registrarVehiculo(vehiculo);
 			FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro Exitoso");
 			FacesContext.getCurrentInstance().addMessage("mensajes_registro_vehiculo", msj);
@@ -115,6 +135,15 @@ public class PersonaBean implements Serializable {
 
 	public String getBusquedaParam() {
 		return busquedaParam;
+	}
+	
+
+	public List<Caracteristica> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(List<Caracteristica> caracteristicas) {
+		this.caracteristicas = caracteristicas;
 	}
 
 	public void setBusquedaParam(String busquedaParam) {
@@ -152,6 +181,15 @@ public class PersonaBean implements Serializable {
 
 	public void setCiudades(List<Ciudad> ciudades) {
 		this.ciudades = ciudades;
+	}
+	
+
+	public List<String> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(List<String> imagenes) {
+		this.imagenes = imagenes;
 	}
 
 	public String getBusqueda() {

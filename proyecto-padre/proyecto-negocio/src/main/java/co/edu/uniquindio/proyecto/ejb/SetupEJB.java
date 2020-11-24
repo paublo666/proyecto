@@ -11,10 +11,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
 import co.edu.uniquindio.banco.entidades.Marca;
 import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
+import co.edu.uniquindio.banco.entidades.Vehiculo;
 
 /**
  * Session Bean implementation class SetupEJB
@@ -59,7 +61,7 @@ public class SetupEJB {
     	m.setNombre("ferrari 2020");
     	m.setId_marca(mar);
     	entityManager.persist(m);
-    	
+
 
     	}
     	

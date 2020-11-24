@@ -1,63 +1,20 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<h:outputStylesheet library="css" name="primeflex.css"></h:outputStylesheet>
-	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-	<title>Unimotor</title>
-</h:head>
-<h:body>
+<ui:composition
+	template="/WEB-INF/template.xhtml">
+	
+	<ui:define name="title">Unimotor</ui:define>
 
-	<div id="header">
-		<div class="p-grid p-justify-center">
-			<div class="p-col-10">
-				<div class="p-grid p-align-center vertical-container">
-					<div class="p-col-2" align="center">
-						<h:form>
-							<p:commandLink action="/index?faces-redirect=true"></p:commandLink>
-							<p:graphicImage library="images" name="vehiculo.png" width="80px"></p:graphicImage>
-						</h:form>
-					</div>
-					<div class="p-col-8" align="center">
-						<h:form>
-							<div class="ui-inputgroup">
-								<p:inputText placeholder="¿Qué vehículo busca?" required="true"
-									value="#{personaBean.busqueda}"></p:inputText>
-								<p:commandButton update="@form" icon="pi pi-search"
-									action="#{personaBean.buscar}"></p:commandButton>
-							</div>
-						</h:form>
-					</div>
-					<div class="p-col-2" align="center">
-						<h:form>
-							<p:commandButton value="Iniciar Sesion"></p:commandButton>
-						</h:form>
-					</div>
-				</div>
+	<ui:define name="content">
 
-				<div>
-					<h:form>
-						<p:commandButton action="registrarPersona?feces-redirect=true"
-							value="REGISTRAR PERSONA" update="@form" />
-						<p:commandButton action="registrarVehiculo?faces-redirect=true"
-							value="REGISTRAR VEHICULO" />
-					</h:form>
-
-				</div>
-			</div>
-		</div>
-
-
-	</div>
-
-	<div id="content">
-		<div class="p-grid p-justify-center">
-			<div class="p-col-10">
+		<div class="p-grid p-justify-center" >
+			<div class="p-col-10" >
 				<h:form>
 					<p:dataView value="#{personaBean.vehiculos}" var="vehiculo"
 						gridIcon="pi pi-th-large" listIcon="pi pi-bars">
@@ -113,22 +70,7 @@
 					</p:dataView>
 				</h:form>
 			</div>
-
-	</div>
-
-	<div>lista de los mas populares</div>
-	</div>
-
-
-
-	<footer>
-
-	<div id="footer" align="center">
-		<p>UNIVERSIDAD DEL QUINDIO</p>
-	</div>
-
-	</footer>
-
-
-</h:body>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

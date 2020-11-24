@@ -12,15 +12,17 @@ import javax.persistence.*;
  *
  */
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name = "LISTA_CARACTERISTICAS", query = "select c from Caracteristica c")
+})
 public class Caracteristica implements Serializable {
 	
 	@ManyToMany
 	private List<Vehiculo> vehiculos;
 
-	@GeneratedValue 
-	@Column (name = "id_caracteristica")
 	@Id
+	@GeneratedValue 
+	@Column (name = "id_caracteristica")	
 	private Integer id_caracteristica;
 	
 	@Column(name = "detalle_caracteristica")
