@@ -12,6 +12,82 @@
 
 	<ui:define name="content">
 
+		<div class="p-grid nested-grid">
+			<div class="p-col-7">
+				<div class="box box-stretched">
+					<p:galleria var="imagen" value="#{detalleVehiculo.vehiculo.fotos}"
+						panelHeight="425">
+						<p:graphicImage url="/../unimotor/#{imagen}" title="#{imagen}"></p:graphicImage>
+					</p:galleria>
+				</div>
+			</div>
+			<div class="p-col-5">
+				<div class="p-grid">
+					<div class="box">
+						<h1>#{detalleVehiculo.vehiculo.nombre_publicacion}</h1>
+						<h:form>
+							<p:toggleSwitch value="#{detalleVehiculo.favorito}">
+								<p:ajax listener="#{detalleVehiculo.marcarComoFavorito}"></p:ajax>
+							</p:toggleSwitch>
+						</h:form>
+					</div>
+					<div class="box">
+						<h3>Vendedor: #{detalleVehiculo.vehiculo.idpersona.nombre}</h3>
+						<h3>Ciudad: #{detalleVehiculo.vehiculo.ciudad.nombre}</h3>
+						<h3>Precio: $ #{detalleVehiculo.vehiculo.precio}</h3>
+					</div>
+					<p:dataList
+						emptyMessage="No hay caracteristicas asociadas al vehiculo"
+						styleClass="lista-carac"
+						value="#{detalleVehiculo.vehiculo.caracteristicas}"
+						var="caracteristica">
+						<f:facet name="header"> Caracteristicas</f:facet>
+						<h:outputText value="#{caracteristica.detalle_caracteristica}"></h:outputText>
+					</p:dataList>
+				</div>
+			</div>
+		</div>
+
+		<br />
+
+		<p:panel header="descripcion">
+			<p>#{detalleVehiculo.vehiculo.descripcion}</p>
+		</p:panel>
+
+		<br />
+
+		<p:panel header="Hacer una pregunta">
+			<h:form>
+				<h:panelGrid columns="2" cellpadding="3">
+					<p:inputTextarea value="#{detalleVehiculo.pregunta}"
+						style="width:450px;height:300px" />
+					<p:commandButton value="Preguntar"
+						action="#{detalleVehiculo.hacerPregunta}" update="@form, lista-c" />
+				</h:panelGrid>
+				<p:growl for="msj-pregunta" showDetails="true"></p:growl>
+			</h:form>
+		</p:panel>
+
+		<br />
+
+		<p:dataList id="lista-c" value="#{detalleVehiculo.vehiculo.preguntas}"
+			var="pregunta" emptyMessage="no hay preguntas" type="definition">
+			<f:facet name="header"> Pregnutas</f:facet>
+			<h:panelGrid columns="1" style="width:100%">
+				<p:outputPanel>
+					<h:panelGrid columns="3" cellpadding="5">
+						<h:outputText value="#{pregunta.persona.nombre}"
+							style="font-weight: bold" />
+						<h:outputText value="#{pregunta.texto_pregunta}" />
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+
+		</p:dataList>
+
+
+
+
 	</ui:define>
 </ui:composition>
 

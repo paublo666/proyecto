@@ -12,6 +12,10 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "LISTA_MARCAS", query = "select m from Marca m "),
+	@NamedQuery(name = "MARCA_POR_NOMBRE", query = "select m from Marca m where m.nombre_marca = :nombre")
+})
 
 public class Marca implements Serializable {
 

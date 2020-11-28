@@ -34,8 +34,7 @@ import javax.validation.constraints.NotNull;
 	@NamedQuery(name = "VEHICULOS_POR_TIPO", query = "select v from Vehiculo v where v.tipovehiculo = :tipo group by v"),
 	@NamedQuery(name = "BUSCAR_POR_PLACA", query = "select v from Vehiculo v where v.placa = :placa"),
 	@NamedQuery(name = "BUSCAR", query = "select v from Vehiculo v where v.nombre_publicacion like :busqueda"),
-
-
+	@NamedQuery(name = "LISTA_CARACTERISTICAS_VEHICULOS", query = "select c from Vehiculo v join v.caracteristicas c where v.idvehiculo = :id")
 })
 public class Vehiculo implements Serializable {
 
@@ -55,6 +54,7 @@ public class Vehiculo implements Serializable {
 	@NotNull(message = "seleccione una opcion")
 	@Column(name = "nuevo", nullable = false)
 	private boolean nuevo;
+	
 	
 	@NotBlank(message = "la descripcion no puede ser vacio")
 	@Column(name = "descripcion", length = 100, nullable = false)

@@ -11,8 +11,10 @@ import javax.persistence.TypedQuery;
 
 import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
+import co.edu.uniquindio.banco.entidades.Marca;
 import co.edu.uniquindio.banco.entidades.Modelo;
 import co.edu.uniquindio.banco.entidades.Persona;
+import co.edu.uniquindio.banco.entidades.Pregunta;
 import co.edu.uniquindio.banco.entidades.TipoCombustible;
 import co.edu.uniquindio.banco.entidades.TipoVehiculo;
 import co.edu.uniquindio.banco.entidades.Transmision;
@@ -56,6 +58,32 @@ public class PersonaEJB implements PersonaEJBRemote {
 	public Ciudad encontrarCiudad(Integer id) {
 		return entityManager.find(Ciudad.class, id);
 	}
+	
+	public Vehiculo encontrarVehiculo(Integer id) {
+		return entityManager.find(Vehiculo.class, id);
+	}
+	
+	public Pregunta hacerPregunta(Persona persona, Vehiculo vehiculo, String textoPregunta) {
+		Pregunta pregunta = null;
+		if(persona!=null && vehiculo!=null) {
+			pregunta = new Pregunta(textoPregunta, vehiculo, persona);
+			entityManager.persist(pregunta);
+		}
+		return pregunta;
+	}
+	
+	public List<Caracteristica> obtenerCaracteristicasVehiculo(Integer codigoV){
+		TypedQuery<Caracteristica> q = entityManager.createNamedQuery("LISTA_CARACTERISTICAS_VEHICULOS", Caracteristica.class);
+		q.setParameter("id",codigoV);
+		return q.getResultList();
+	}
+	
+	public List<Pregunta> obtenerPreguntasVehiculo(Integer codigoV){
+		TypedQuery<Pregunta> q = entityManager.createNamedQuery("LISTA_PREGUNTAS",Pregunta.class);
+		q.setParameter("id",codigoV);
+		return q.getResultList();
+	}
+	
 	
 	public List<Ciudad> obtenerListaCiudades ()
 	{
@@ -196,5 +224,56 @@ public class PersonaEJB implements PersonaEJBRemote {
 		TypedQuery<Modelo> q= entityManager.createNamedQuery("LISTA_MODELOS",Modelo.class);
 		return q.getResultList();
 	}
-
+	
+	public List<Marca> listaMarcas()
+	{
+		TypedQuery<Marca> q = entityManager.createNamedQuery("LISTA_MARCAS", Marca.class);
+		return q.getResultList();
+	}
+	
+	public Marca obtenerMarca(Integer id) throws Exception {
+		Marca m = entityManager.find(Marca.class, id);
+		if(m!=null) {
+			return m;
+		}else {
+			throw new Exception("la marca no existe");
+		}
+		
+	}
+	
+	public boolean buscarNombreMarca(String nombreMarca) {
+		TypedQuery<Marca> q = entityManager.createNamedQuery("MARCA_POR_NOMBRE",Marca.class);
+		q.setParameter("nombre",nombreMarca);
+		List<Marca> l= q.getResultList();
+		if(l.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public void guardarMarca (Marca marca) throws Exception {
+		if(buscarNombreMarca(marca.getNombre_marca())) {
+			throw new Exception("el nombre de la marca ya esta registrado");
+		}
+		entityManager.persist(marca);
+	}
+	
+	public void eliminarMarca(Integer id) throws Exception {
+		Marca marca = entityManager.find(Marca.class,id);
+		if(marca!=null) {
+			entityManager.remove(marca);
+		}else {
+			throw new Exception("la marca no existe");
+		}
+	}
+	
+	public void actualizarMarca (Marca marca) throws Exception {
+		if (marca!=null) {
+			entityManager.merge(marca);
+		}else {
+			throw new Exception("la marca es null");
+		}
+	}
+	
+	
 }

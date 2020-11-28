@@ -10,6 +10,11 @@ import javax.persistence.*;
  *
  */
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "LISTA_PREGUNTAS", query = "select distinct p.persona from Pregunta p where p.vehiculo.idvehiculo = :id"),
+	@NamedQuery(name = "LISTA_PERSONAS_PREGUNTA_VEHICULO", query = "select p from Pregunta p where p.vehiculo.idvehiculo = :id")
+
+})
 
 public class Pregunta implements Serializable {
 
@@ -38,6 +43,12 @@ public class Pregunta implements Serializable {
 	private Pregunta pregunta;
 	
 	
+	public Pregunta(String texto_pregunta, Vehiculo vehiculo, Persona persona) {
+		super();
+		this.texto_pregunta = texto_pregunta;
+		this.vehiculo = vehiculo;
+		this.persona = persona;
+	}
 	private static final long serialVersionUID = 1L;
 
 	public Pregunta() {
@@ -63,6 +74,25 @@ public class Pregunta implements Serializable {
 
 	public void setFecha_pregunta(String fecha_pregunta) {
 		this.fecha_pregunta = fecha_pregunta;
+	}
+	
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+	public Persona getPersona() {
+		return persona;
+	}
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+	public Pregunta getPregunta() {
+		return pregunta;
+	}
+	public void setPregunta(Pregunta pregunta) {
+		this.pregunta = pregunta;
 	}
 	@Override
 	public int hashCode() {

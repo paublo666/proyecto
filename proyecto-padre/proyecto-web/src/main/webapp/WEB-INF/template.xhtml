@@ -50,27 +50,26 @@
 									action="#{seguridadBean.cerrarSesion}" />
 							</p:splitButton>
 						</h:form>
-
 					</div>
-
 				</div>
-
-
 
 				<div>
 					<h:form>
 						<p:commandButton rendered="#{!seguridadBean.autenticado}"
-							action="registrarPersona?feces-redirect=true"
-							value="REGISTRARSE" update="@form" />
+							action="registrarPersona?faces-redirect=true" value="REGISTRARSE"
+							update="@form" />
 						<p:commandButton rendered="#{seguridadBean.autenticado}"
 							action="/usuario/registrarVehiculo?faces-redirect=true"
 							value="REGISTRAR VEHICULO" />
+						<p:commandButton rendered="#{seguridadBean.autenticado}"
+							action="/usuario/miPerfil?faces-redirect=true" value="MI PERFIL" />
 					</h:form>
 
 				</div>
 			</div>
 		</div>
 		<p:dialog widgetVar="form-sesion" header="Iniciar Sesion" modal="true">
+
 			<h:form>
 				<h:panelGrid columns="3">
 					<p:outputLabel for="email_login" value="Email"></p:outputLabel>
@@ -79,7 +78,7 @@
 					<p:message for="email_login"></p:message>
 
 					<p:outputLabel for="password_login" value="Clave"></p:outputLabel>
-					<p:inputText id="password_login"
+					<p:password id="password_login"
 						value="#{seguridadBean.passwordLogin}" required="true" />
 					<p:message for="password_login"></p:message>
 				</h:panelGrid>
@@ -91,11 +90,8 @@
 					action="#{seguridadBean.enviarCorreo}" update="@form" />
 
 				<p:growl for="mensaje_sesion" showDetail="true"></p:growl>
-
 			</h:form>
 		</p:dialog>
-
-
 
 	</div>
 
