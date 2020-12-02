@@ -2,12 +2,19 @@ package co.edu.uniquindio.proyecto.ejb;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.swing.JOptionPane;
 
 import co.edu.uniquindio.banco.entidades.Caracteristica;
 import co.edu.uniquindio.banco.entidades.Ciudad;
@@ -47,6 +54,61 @@ public class PersonaEJB implements PersonaEJBRemote {
 		
 		entityManager.persist(persona);
 		
+	}
+	
+	public void enviarCorreo(String email, String password) throws Exception {
+
+
+		Properties propiedad = new Properties();
+		propiedad.setProperty("mail.smtp.host", "smtp.gmail.com");
+		propiedad.setProperty("mail.smtp.starttls.enable", "true");
+		propiedad.setProperty("mail.smtp.port", "587");
+		propiedad.setProperty("mail.smtp.auth", "true");
+		propiedad.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+		Session sesion = Session.getDefaultInstance(propiedad);
+
+		String correoEnvia ="pcduquer@uqvirtual.edu.co";
+		String contraseña ="960116047201";
+		try {
+
+
+
+			String destinatario =email;
+			String asunto = "Recuperar Contraseña";
+			String mensaje = "la contraseña es: "+ password ;
+
+
+			MimeMessage mail = new MimeMessage(sesion);
+
+
+			mail.setFrom(new InternetAddress (correoEnvia));
+
+			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
+			mail.setSubject(asunto);
+			mail.setText(mensaje);
+
+
+			Transport transporte = sesion.getTransport("smtp");
+
+
+			transporte.connect(correoEnvia, contraseña);
+			transporte.sendMessage(mail, mail.getRecipients(Message.RecipientType.TO));
+			transporte.close();
+
+
+			JOptionPane.showMessageDialog(null, "correo Enviado");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Persona> recuperarPersona(String emailLogin)
+	{
+		TypedQuery<Persona> q= entityManager.createNamedQuery("BUSCAR_POR_EMAIL", Persona.class);
+		q.setParameter("email", emailLogin);
+		return q.getResultList();
 	}
 	
 	public List<Caracteristica> listaCaracteristicas(){

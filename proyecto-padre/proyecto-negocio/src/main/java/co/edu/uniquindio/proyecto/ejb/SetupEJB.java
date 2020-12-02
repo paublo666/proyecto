@@ -50,7 +50,7 @@ public class SetupEJB {
     	tels.put("casa",7353844);
     	tels.put("trabajo",300559);
     	
-    	Persona persona = new Persona("pablo", "pablo@gmail.com","123", "calle 13", c1, tels);
+    	Persona persona = new Persona("pablo", "anag.stella@gmail.com","123", "calle 13", c1, tels);
     	entityManager.persist(persona);
     	
     	Marca mar= new Marca();

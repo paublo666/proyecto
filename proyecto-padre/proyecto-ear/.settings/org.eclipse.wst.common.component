@@ -8,6 +8,9 @@
         <dependent-module archiveName="proyecto-persistencia.jar" deploy-path="/lib" handle="module:/resource/proyecto-persistencia/proyecto-persistencia">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="javax.mail-api.jar" deploy-path="/lib" handle="module:/classpath/var/M2_REPO/javax/mail/javax.mail-api/1.6.2/javax.mail-api-1.6.2.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="proyecto-web.war" deploy-path="/" handle="module:/resource/proyecto-web/proyecto-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>

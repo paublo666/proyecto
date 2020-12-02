@@ -45,6 +45,7 @@ public class NegocioTest {
 		System.out.println(personaejb.iniciarSesion("psa@mail", "123"));
 
 	}
+	
 
 
 }

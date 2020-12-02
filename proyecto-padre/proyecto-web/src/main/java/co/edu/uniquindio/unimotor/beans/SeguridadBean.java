@@ -1,6 +1,8 @@
 package co.edu.uniquindio.unimotor.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,6 +60,21 @@ public class SeguridadBean implements Serializable {
 	public String cerrarSesion () {
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "/index?faces-redirect=true";
+	}
+	
+	public void enviarCorreo (){
+		try {
+			if(!emailLogin.isEmpty())
+			{
+			List<Persona> lista = new ArrayList<Persona>();
+			lista =unimotorEJB.recuperarPersona(emailLogin);
+			unimotorEJB.enviarCorreo( emailLogin, lista.get(0).getClave());
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Persona getPersona() {
