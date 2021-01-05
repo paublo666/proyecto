@@ -47,7 +47,7 @@ public class PersonaBean implements Serializable {
 	private PersonaEJB unimotorEJB;
 	private Persona persona;
 	@Inject
-	@ManagedProperty(value = "#{SeguridadBeam.persona}")
+	@ManagedProperty(value = "#{SeguridadBean.persona}")
 	private Persona persona1;
 	private Ciudad ciudad;
 	private Vehiculo vehiculo;
@@ -96,7 +96,7 @@ public class PersonaBean implements Serializable {
 	public String buscar() {
 		return "resultadoBusqueda?faces-redirect=true&amp;busqueda="+busqueda;
 	}
-	
+
 	public void subirImagenes(FileUploadEvent event) {
 		UploadedFile imagen = event.getFile();
 		String nombreImangen = subirImagen(imagen);
@@ -104,28 +104,28 @@ public class PersonaBean implements Serializable {
 			imagenes.add(nombreImangen);
 		}
 	}
-	
+
 	public String subirImagen(UploadedFile file) {
 		try {
 			InputStream input = file.getInputStream();
 			String filename= FilenameUtils.getName(file.getFileName());
 			String basename = FilenameUtils.getBaseName(filename) + "_";
 			String extension = "." + FilenameUtils.getExtension(filename);
-			
+
 			File fileDest= File.createTempFile(basename, extension, new File(RUTA_FOTOS));
 			FileOutputStream output= new FileOutputStream(fileDest);
-			
+
 			IOUtils.copy(input, output);
-			
+
 			return fileDest.getName();
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return null;
 	}
- 
+
 
 	public void buscarVehiculo() {
 
@@ -133,12 +133,12 @@ public class PersonaBean implements Serializable {
 
 	public void registrarPersona () {
 		try {
-			
+
 			unimotorEJB.registrarPersona(persona);
 
 			FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro Exitoso");
 			FacesContext.getCurrentInstance().addMessage("mensajes_registro_persona", msj);
- 
+
 		} catch (Exception e) {
 			FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
 			FacesContext.getCurrentInstance().addMessage("mensajes_registro_persona", msj);
@@ -149,11 +149,11 @@ public class PersonaBean implements Serializable {
 	public void registrarVehiculo() {
 		try {
 			if(!imagenes.isEmpty()) {
-			unimotorEJB.registrarVehiculo(vehiculo);
-			vehiculo.setFotos(imagenes);
-			vehiculo.setIdpersona(persona1);
-			FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro Exitoso");
-			FacesContext.getCurrentInstance().addMessage("mensajes_registro_vehiculo", msj);
+				vehiculo.setIdpersona(persona1);
+				vehiculo.setFotos(imagenes);
+				unimotorEJB.registrarVehiculo(vehiculo);
+				FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_INFO, "Alerta", "Registro Exitoso");
+				FacesContext.getCurrentInstance().addMessage("mensajes_registro_vehiculo", msj);
 			}else {
 				FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", "Debe asignar una imagen");
 				FacesContext.getCurrentInstance().addMessage("mensajes_registro_vehiculo", msj);
@@ -167,7 +167,7 @@ public class PersonaBean implements Serializable {
 	public String getBusquedaParam() {
 		return busquedaParam;
 	}
-	
+
 
 	public List<Caracteristica> getCaracteristicas() {
 		return caracteristicas;
@@ -188,7 +188,7 @@ public class PersonaBean implements Serializable {
 	public void setLista(List<Vehiculo> lista) {
 		this.lista = lista;
 	}
-	
+
 
 	public List<Vehiculo> getVehiculos() {
 		return vehiculos;
@@ -213,7 +213,7 @@ public class PersonaBean implements Serializable {
 	public void setCiudades(List<Ciudad> ciudades) {
 		this.ciudades = ciudades;
 	}
-	
+
 
 	public ArrayList<String> getImagenes() {
 		return imagenes;

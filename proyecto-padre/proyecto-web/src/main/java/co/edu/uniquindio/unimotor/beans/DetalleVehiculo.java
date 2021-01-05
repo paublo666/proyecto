@@ -35,8 +35,14 @@ public class DetalleVehiculo implements Serializable {
 	private String pregunta;
 	private boolean favorito;
 	
+	private List<Vehiculo> vehiculoid;
+
+	private List<Pregunta> preguntas;
+	private List<Caracteristica> caractetisticas;
+	
+		
 	@Inject
-	@ManagedProperty(value = "#{SeguridadBeam.persona}")
+	@ManagedProperty(value = "#{SeguridadBean.persona}")
 	private Persona persona;
 	
 	@Inject
@@ -51,6 +57,7 @@ public class DetalleVehiculo implements Serializable {
 				vehiculo=unimotorEJB.encontrarVehiculo(codigoV);
 				preguntas=unimotorEJB.obtenerPreguntasVehiculo(codigoV);
 				caractetisticas=unimotorEJB.obtenerCaracteristicasVehiculo(codigoV);
+				vehiculoid=unimotorEJB.vehiculoId(persona.getId());
 			} catch (Exception e) {
 				// TODO: handle exception
 			} 
@@ -66,7 +73,7 @@ public class DetalleVehiculo implements Serializable {
 
 		} catch (Exception e) {
 			FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Alerta", e.getMessage());
-			FacesContext.getCurrentInstance().addMessage("mensaje_sesion", msj);		}
+			FacesContext.getCurrentInstance().addMessage("msj-pregunta", msj);		}
 	}
 	
 	
@@ -78,12 +85,6 @@ public class DetalleVehiculo implements Serializable {
 	public void setPersona(Persona persona) {
 		this.persona = persona;
 	}
-
-
-
-	private List<Pregunta> preguntas;
-	private List<Caracteristica> caractetisticas;
-	
 	
 	public String getProyectoParam() {
 		return proyectoParam;
@@ -109,6 +110,15 @@ public class DetalleVehiculo implements Serializable {
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	
+	public List<Vehiculo> getVehiculoid() {
+		return vehiculoid;
+	}
+
+	public void setVehiculoid(List<Vehiculo> vehiculoid) {
+		this.vehiculoid = vehiculoid;
+	}
+
 	public String getPregunta() {
 		return pregunta;
 	}

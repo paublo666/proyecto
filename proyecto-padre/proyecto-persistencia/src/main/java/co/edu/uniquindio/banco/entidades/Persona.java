@@ -19,7 +19,9 @@ import javax.validation.constraints.NotBlank;
     @NamedQuery(name = "LISTA_PERSONAS_ORDENADA", query = "select p from Persona p order by p.nombre asc"),
     @NamedQuery(name = "BUSCAR_POR_EMAIL", query = "select p from Persona p where p.email = :email"),
     @NamedQuery(name = "COUNT_PERSONAS", query = "select count (p) from Persona p"),
-    @NamedQuery(name = "LISTA_PERSONAS", query = "select p from Persona p")
+    @NamedQuery(name = "LISTA_PERSONAS", query = "select p from Persona p"),
+	@NamedQuery(name = "PERSONA_POR_NOMBRE", query = "select p from Persona p where p.nombre = :nombre")
+
 
 })
 

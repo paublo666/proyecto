@@ -34,7 +34,11 @@ import javax.validation.constraints.NotNull;
 	@NamedQuery(name = "VEHICULOS_POR_TIPO", query = "select v from Vehiculo v where v.tipovehiculo = :tipo group by v"),
 	@NamedQuery(name = "BUSCAR_POR_PLACA", query = "select v from Vehiculo v where v.placa = :placa"),
 	@NamedQuery(name = "BUSCAR", query = "select v from Vehiculo v where v.nombre_publicacion like :busqueda"),
-	@NamedQuery(name = "LISTA_CARACTERISTICAS_VEHICULOS", query = "select c from Vehiculo v join v.caracteristicas c where v.idvehiculo = :id")
+	@NamedQuery(name = "LISTA_CARACTERISTICAS_VEHICULOS", query = "select c from Vehiculo v join v.caracteristicas c where v.idvehiculo = :id"),
+	@NamedQuery(name = "VEHICULO_POR_ID", query = "select v from Vehiculo v where v.idpersona.id = :id"),
+	@NamedQuery(name = "VEHICULO_POR_NOMBRE", query = "select v from Vehiculo v where v.nombre_publicacion = :nombre")
+
+
 })
 public class Vehiculo implements Serializable {
 
@@ -76,7 +80,7 @@ public class Vehiculo implements Serializable {
 	private String color;
 	
 	@ElementCollection
-	private java.util.ArrayList<String> fotos;
+	private List<String> fotos;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -205,10 +209,10 @@ public class Vehiculo implements Serializable {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	public java.util.ArrayList<String> getFotos() {
+	public List<String> getFotos() {
 		return fotos;
 	}
-	public void setFotos(java.util.ArrayList<String> fotos) {
+	public void setFotos(List<String> fotos) {
 		this.fotos = fotos;
 	}
 	public Persona getIdpersona() {

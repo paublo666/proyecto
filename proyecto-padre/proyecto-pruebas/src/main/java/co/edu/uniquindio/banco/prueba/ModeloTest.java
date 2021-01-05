@@ -317,7 +317,7 @@ public class ModeloTest {
 	public void listaVehiculoTransmisionTest ()
 	{
 		TypedQuery<Vehiculo> q = entitymanager.createNamedQuery("VEHICULOS_TRANSMISION", Vehiculo.class);
-		q.setParameter("t", Transmision.AUTOMATICO);
+		q.setParameter("t", Transmision.AUTOMATICA);
 		List <Vehiculo> l = q.getResultList();
 
 		for (Vehiculo v : l) {

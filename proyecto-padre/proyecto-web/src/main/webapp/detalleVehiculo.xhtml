@@ -15,7 +15,7 @@
 		<div class="p-grid nested-grid">
 			<div class="p-col-7">
 				<div class="box box-stretched">
-					<p:galleria var="imagen" value="#{detalleVehiculo.vehiculo.fotos}"
+					<p:galleria value="#{detalleVehiculo.vehiculo.fotos}" var="imagen"
 						panelHeight="425">
 						<p:graphicImage url="/../unimotor/#{imagen}" title="#{imagen}"></p:graphicImage>
 					</p:galleria>
@@ -25,7 +25,7 @@
 				<div class="p-grid">
 					<div class="box">
 						<h1>#{detalleVehiculo.vehiculo.nombre_publicacion}</h1>
-						<h:form>
+						<h:form rendered="#{seguridadBean.autenticado}" >
 							<p:toggleSwitch value="#{detalleVehiculo.favorito}">
 								<p:ajax listener="#{detalleVehiculo.marcarComoFavorito}"></p:ajax>
 							</p:toggleSwitch>
@@ -36,14 +36,14 @@
 						<h3>Ciudad: #{detalleVehiculo.vehiculo.ciudad.nombre}</h3>
 						<h3>Precio: $ #{detalleVehiculo.vehiculo.precio}</h3>
 					</div>
-					<p:dataList
-						emptyMessage="No hay caracteristicas asociadas al vehiculo"
-						styleClass="lista-carac"
-						value="#{detalleVehiculo.vehiculo.caracteristicas}"
-						var="caracteristica">
-						<f:facet name="header"> Caracteristicas</f:facet>
-						<h:outputText value="#{caracteristica.detalle_caracteristica}"></h:outputText>
-					</p:dataList>
+						<p:dataList
+							emptyMessage="No hay caracteristicas asociadas al vehiculo"
+							styleClass="lista-carac"
+							value="#{detalleVehiculo.vehiculo.caracteristicas}"
+							var="caracteristica">
+							<f:facet name="header"> Caracteristicas</f:facet>
+							<h:outputText value="#{caracteristica.detalle_caracteristica}"></h:outputText>
+						</p:dataList>
 				</div>
 			</div>
 		</div>
@@ -56,7 +56,7 @@
 
 		<br />
 
-		<p:panel header="Hacer una pregunta">
+		<p:panel header="Hacer una pregunta" rendered="#{seguridadBean.autenticado}" >
 			<h:form>
 				<h:panelGrid columns="2" cellpadding="3">
 					<p:inputTextarea value="#{detalleVehiculo.pregunta}"
@@ -72,7 +72,7 @@
 
 		<p:dataList id="lista-c" value="#{detalleVehiculo.vehiculo.preguntas}"
 			var="pregunta" emptyMessage="no hay preguntas" type="definition">
-			<f:facet name="header"> Pregnutas</f:facet>
+			<f:facet name="header"> Preguntas</f:facet>
 			<h:panelGrid columns="1" style="width:100%">
 				<p:outputPanel>
 					<h:panelGrid columns="3" cellpadding="5">

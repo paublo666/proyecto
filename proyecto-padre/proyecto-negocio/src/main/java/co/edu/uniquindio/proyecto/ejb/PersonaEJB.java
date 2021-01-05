@@ -81,7 +81,6 @@ public class PersonaEJB implements PersonaEJBRemote {
 
 			MimeMessage mail = new MimeMessage(sesion);
 
-
 			mail.setFrom(new InternetAddress (correoEnvia));
 
 			mail.addRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
@@ -125,13 +124,25 @@ public class PersonaEJB implements PersonaEJBRemote {
 		return entityManager.find(Vehiculo.class, id);
 	}
 	
-	public Pregunta hacerPregunta(Persona persona, Vehiculo vehiculo, String textoPregunta) {
+	public List<Vehiculo> vehiculoId (Integer codigoV){
+		TypedQuery<Vehiculo> q = entityManager.createNamedQuery("VEHICULO_POR_ID", Vehiculo.class);
+		q.setParameter("id",codigoV);
+		return q.getResultList();
+		
+	}
+	
+	public Pregunta hacerPregunta(Persona persona, Vehiculo vehiculo, String textoPregunta)throws Exception{
+		try {
 		Pregunta pregunta = null;
 		if(persona!=null && vehiculo!=null) {
 			pregunta = new Pregunta(textoPregunta, vehiculo, persona);
 			entityManager.persist(pregunta);
 		}
 		return pregunta;
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("error al registrar pregunta");
+		}
 	}
 	
 	public List<Caracteristica> obtenerCaracteristicasVehiculo(Integer codigoV){
@@ -303,10 +314,49 @@ public class PersonaEJB implements PersonaEJBRemote {
 		
 	}
 	
+	public Vehiculo obtenerVehiculo(Integer id) throws Exception {
+		Vehiculo m = entityManager.find(Vehiculo.class, id);
+		if(m!=null) {
+			return m;
+		}else {
+			throw new Exception("el vehiculo no existe");
+		}
+		
+	}
+	
+	public Persona obtenerPersona(Integer id) throws Exception {
+		Persona m = entityManager.find(Persona.class, id);
+		if(m!=null) {
+			return m;
+		}else {
+			throw new Exception("la persona no existe");
+		}
+		
+	}
+	
 	public boolean buscarNombreMarca(String nombreMarca) {
 		TypedQuery<Marca> q = entityManager.createNamedQuery("MARCA_POR_NOMBRE",Marca.class);
 		q.setParameter("nombre",nombreMarca);
 		List<Marca> l= q.getResultList();
+		if(l.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	public boolean buscarNombrePersona(String nombreMarca) {
+		TypedQuery<Persona> q = entityManager.createNamedQuery("PERSONA_POR_NOMBRE",Persona.class);
+		q.setParameter("nombre",nombreMarca);
+		List<Persona> l= q.getResultList();
+		if(l.isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean buscarNombreVehiculo(String nombreMarca) {
+		TypedQuery<Vehiculo> q = entityManager.createNamedQuery("VEHICULO_POR_NOMBRE",Vehiculo.class);
+		q.setParameter("nombre",nombreMarca);
+		List<Vehiculo> l= q.getResultList();
 		if(l.isEmpty()) {
 			return false;
 		}
@@ -320,6 +370,21 @@ public class PersonaEJB implements PersonaEJBRemote {
 		entityManager.persist(marca);
 	}
 	
+	public void guardarPersona (Persona persona) throws Exception {
+		if(buscarNombrePersona(persona.getNombre())) {
+			throw new Exception("el nombre de la Persona ya esta registrado");
+		}
+		entityManager.persist(persona);
+	}
+	
+	public void guardarVehiculo (Vehiculo vehiculo) throws Exception {
+		if(buscarNombrePersona(vehiculo.getNombre_publicacion())) {
+			throw new Exception("el nombre del vehiculo ya esta registrado");
+		}
+		entityManager.persist(vehiculo);
+	}
+	
+	
 	public void eliminarMarca(Integer id) throws Exception {
 		Marca marca = entityManager.find(Marca.class,id);
 		if(marca!=null) {
@@ -329,11 +394,44 @@ public class PersonaEJB implements PersonaEJBRemote {
 		}
 	}
 	
+	public void eliminarPersona(Integer id) throws Exception {
+		Persona marca = entityManager.find(Persona.class,id);
+		if(marca!=null) {
+			entityManager.remove(marca);
+		}else {
+			throw new Exception("la persona no existe");
+		}
+	}
+	
+	public void eliminarVehiculo(Integer id) throws Exception {
+		Vehiculo marca = entityManager.find(Vehiculo.class,id);
+		if(marca!=null) {
+			entityManager.remove(marca);
+		}else {
+			throw new Exception("el vehiculo no existe");
+		}
+	}
+	
 	public void actualizarMarca (Marca marca) throws Exception {
 		if (marca!=null) {
 			entityManager.merge(marca);
 		}else {
 			throw new Exception("la marca es null");
+		}
+	}
+	
+	public void actualizarPersona (Persona persona) throws Exception {
+		if (persona!=null) {
+			entityManager.merge(persona);
+		}else {
+			throw new Exception("la persona es null");
+		}
+	}
+	public void actualizarVehiculo(Vehiculo vehiculo)throws Exception {
+		if (vehiculo!=null) {
+			entityManager.merge(vehiculo);
+		}else {
+			throw new Exception("el vehiculo es null");
 		}
 	}
 	
